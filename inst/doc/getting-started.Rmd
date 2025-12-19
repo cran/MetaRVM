@@ -1,0 +1,104 @@
+---
+title: "Getting Started with MetaRVM"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{Getting Started with MetaRVM}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>",
+  fig.width = 7,
+  fig.height = 5
+)
+```
+
+## Introduction
+
+MetaRVM is a comprehensive R package for simulating respiratory virus epidemics using meta-population compartmental models. This vignette will guide you through the basic usage of the package.
+
+## Installation
+
+You can install the development version of MetaRVM from GitHub:
+
+```{r eval=FALSE}
+# install.packages("devtools")
+devtools::install_github("RESUME-Epi/MetaRVM")
+```
+
+## Loading the Package
+
+```{r setup, eval=FALSE}
+library(MetaRVM)
+library(ggplot2)
+options(odin.verbose = FALSE)
+```
+
+## Basic Example
+
+This example shows how to run a basic meta-population simulation.
+
+The `metaRVM` package includes a set of example files in its `extdata` directory. To run the example, we first need to locate these files. The `system.file()` function in R is the recommended way to do this, as it will find the files wherever the package is installed.
+
+```{r}
+# Locate the example YAML configuration file
+yaml_file <- system.file("extdata", "example_config.yaml", package = "MetaRVM")
+print(yaml_file)
+```
+
+The `yaml_file` variable now holds the full path to the example configuration file. This file is set up to use the other example data files (also in the `extdata` directory) with relative paths. Below is the content of the yaml file.
+
+```yaml
+run_id: ExampleRun
+population_data:
+  mapping: demographic_mapping_n24.csv
+  initialization: population_init_n24.csv
+  vaccination: vaccination_n24.csv
+mixing_matrix:
+  weekday_day: m_weekday_day.csv
+  weekday_night: m_weekday_night.csv
+  weekend_day: m_weekend_day.csv
+  weekend_night: m_weekend_night.csv
+disease_params:
+  ts: 0.5
+  tv: 0.25
+  ve: 0.4
+  dv: 180
+  dp: 1
+  de: 3
+  da: 5
+  ds: 6
+  dh: 8
+  dr: 180
+  pea: 0.3
+  psr: 0.95
+  phr: 0.97
+simulation_config:
+  start_date: 01/01/2023 # m/d/Y
+  length: 150
+  nsim: 1
+```
+
+For a detailed explanation of all the configuration options, please see the `yaml-configuration.html` vignette.
+
+## Running the Simulation
+
+Once we have the path to the configuration file, the simulation can be run using the `metaRVM()` function.
+
+```{r, results='hide'}
+# Load the metaRVM library
+library(MetaRVM)
+
+# Run the simulation
+sim_out <- metaRVM(yaml_file)
+```
+
+```{r}
+print(sim_out)
+head(sim_out$results)
+```
+
+For more details on running `metaRVM`, refer to the `running-a-simulation.html` vignette.
