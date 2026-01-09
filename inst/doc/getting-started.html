@@ -370,7 +370,7 @@ package is installed.</p>
 <div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" tabindex="-1"></a><span class="co"># Locate the example YAML configuration file</span></span>
 <span id="cb3-2"><a href="#cb3-2" tabindex="-1"></a>yaml_file <span class="ot">&lt;-</span> <span class="fu">system.file</span>(<span class="st">&quot;extdata&quot;</span>, <span class="st">&quot;example_config.yaml&quot;</span>, <span class="at">package =</span> <span class="st">&quot;MetaRVM&quot;</span>)</span>
 <span id="cb3-3"><a href="#cb3-3" tabindex="-1"></a><span class="fu">print</span>(yaml_file)</span>
-<span id="cb3-4"><a href="#cb3-4" tabindex="-1"></a><span class="co">#&gt; [1] &quot;/tmp/Rtmp88aTaJ/Rinst624f3b5c4968/MetaRVM/extdata/example_config.yaml&quot;</span></span></code></pre></div>
+<span id="cb3-4"><a href="#cb3-4" tabindex="-1"></a><span class="co">#&gt; [1] &quot;/tmp/RtmpHAfDzH/Rinst7bf731fd9921d/MetaRVM/extdata/example_config.yaml&quot;</span></span></code></pre></div>
 <p>The <code>yaml_file</code> variable now holds the full path to the
 example configuration file. This file is set up to use the other example
 data files (also in the <code>extdata</code> directory) with relative
@@ -414,7 +414,14 @@ be run using the <code>metaRVM()</code> function.</p>
 <span id="cb5-2"><a href="#cb5-2" tabindex="-1"></a><span class="fu">library</span>(MetaRVM)</span>
 <span id="cb5-3"><a href="#cb5-3" tabindex="-1"></a></span>
 <span id="cb5-4"><a href="#cb5-4" tabindex="-1"></a><span class="co"># Run the simulation</span></span>
-<span id="cb5-5"><a href="#cb5-5" tabindex="-1"></a>sim_out <span class="ot">&lt;-</span> <span class="fu">metaRVM</span>(yaml_file)</span></code></pre></div>
+<span id="cb5-5"><a href="#cb5-5" tabindex="-1"></a>sim_out <span class="ot">&lt;-</span> <span class="fu">metaRVM</span>(yaml_file)</span>
+<span id="cb5-6"><a href="#cb5-6" tabindex="-1"></a><span class="co">#&gt; Loading required namespace: pkgbuild</span></span>
+<span id="cb5-7"><a href="#cb5-7" tabindex="-1"></a><span class="co">#&gt; Unused equations: beta_v, dim_beta_v</span></span>
+<span id="cb5-8"><a href="#cb5-8" tabindex="-1"></a><span class="co">#&gt;  beta_v[] &lt;- user() # (line 108)</span></span>
+<span id="cb5-9"><a href="#cb5-9" tabindex="-1"></a><span class="co">#&gt;  dim(beta_v) &lt;- N_pop # (line 145)</span></span>
+<span id="cb5-10"><a href="#cb5-10" tabindex="-1"></a><span class="co">#&gt; Generating model in c</span></span>
+<span id="cb5-11"><a href="#cb5-11" tabindex="-1"></a><span class="co">#&gt; ℹ Re-compiling odin7816d650 (debug build)</span></span>
+<span id="cb5-12"><a href="#cb5-12" tabindex="-1"></a><span class="co">#&gt; ℹ Loading odin7816d650</span></span></code></pre></div>
 <div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" tabindex="-1"></a><span class="fu">print</span>(sim_out)</span>
 <span id="cb6-2"><a href="#cb6-2" tabindex="-1"></a><span class="co">#&gt; MetaRVM Results Object</span></span>
 <span id="cb6-3"><a href="#cb6-3" tabindex="-1"></a><span class="co">#&gt; =====================</span></span>
