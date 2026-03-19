@@ -11,8 +11,8 @@
 #' @details
 #' The configuration input controls:
 #'
-#' - **Population structure** (e.g., age, race, zone)
-#' - **Disease parameters** (`ts`, `tv`, `ve`, `de`, `dp`, `da`, `ds`,
+#' - **Population structure** (user-defined categories and the initial compartment counts from the initialization file)
+#' - **Disease parameters** (`ts`, `ve`, `de`, `dp`, `da`, `ds`,
 #'   `dh`, `dr`, `pea`, `psr`, `phr`, `dv`, etc.)
 #' - **Mixing matrices** (weekday/weekend, day/night contact patterns)
 #' - **Vaccination schedule** and immunity waning
@@ -45,8 +45,8 @@
 #'     columns include:
 #'     \itemize{
 #'       \item `date`: calendar date (`Date`)
-#'       \item `age`, `race`, `zone`: demographic categories (if present
-#'             in the population mapping)
+#'       \item user-defined demographic category columns (if present
+#'             in the initialization file)
 #'       \item `disease_state`: compartment or flow label (e.g., `S`, `E`,
 #'             `I_symp`, `H`, `R`, `D`, `n_SE`, `n_IsympH`, etc.)
 #'       \item `value`: population count or daily flow
@@ -79,9 +79,9 @@
 #' # Access the tidy results table
 #' head(results$results)
 #'
-#' # Summarize and plot hospitalizations and deaths by age and race
+#' # Summarize and plot hospitalizations and deaths by user-defined categories
 #' results$summarize(
-#'   group_by       = c("age", "race"),
+#'   group_by       = c("age", "zone"),
 #'   disease_states = c("H", "D"),
 #'   stats          = c("median", "quantile"),
 #'   quantiles      = c(0.25, 0.75)
@@ -151,7 +151,6 @@ metaRVM <- function(config_input) {
                   delta_t = config_obj$config_data$delta_t,
                   vac_mat = config_obj$config_data$vac_mat,
                   ts = config_obj$config_data$ts[ii, ],
-                  tv = config_obj$config_data$tv[ii, ],
                   dv = config_obj$config_data$dv[ii, ],
                   de = config_obj$config_data$de[ii, ],
                   pea = config_obj$config_data$pea[ii, ],

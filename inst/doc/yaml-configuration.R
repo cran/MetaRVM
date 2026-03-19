@@ -4,13 +4,6 @@ knitr::opts_chunk$set(
   comment = "#>"
 )
 
-## ----mapping_example, echo=FALSE----------------------------------------------
-mapping_file <- system.file("extdata", "demographic_mapping_n24.csv", package = "MetaRVM")
-mapping_data <- read.csv(mapping_file)
-cat("First 10 rows of demographic_mapping_n24.csv:\n\n")
-print(head(mapping_data, 10))
-cat("\n... (", nrow(mapping_data), " total rows)\n", sep = "")
-
 ## ----init_example, echo=FALSE-------------------------------------------------
 init_file <- system.file("extdata", "population_init_n24.csv", package = "MetaRVM")
 init_data <- read.csv(init_file)

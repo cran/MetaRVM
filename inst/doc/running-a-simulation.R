@@ -34,14 +34,15 @@ param_summary <- config_obj$parameter_summary()
 head(param_summary, 10)
 
 ## -----------------------------------------------------------------------------
-# Get demographic categories
-age_categories <- config_obj$get_age_categories()
-race_categories <- config_obj$get_race_categories()
-zones <- config_obj$get_zones()
+# Get user-defined demographic category names and values
+category_names <- config_obj$get_category_names()
+cat("Available categories:", paste(category_names, collapse = ", "), "\n")
 
-cat("Age categories:", paste(age_categories, collapse = ", "), "\n")
-cat("Race categories:", paste(race_categories, collapse = ", "), "\n")
-cat("Geographic zones:", paste(zones, collapse = ", "), "\n")
+# Example: inspect values for one category (if present)
+if ("age" %in% category_names) {
+  age_categories <- config_obj$get_category_values("age")
+  cat("Age categories:", paste(age_categories, collapse = ", "), "\n")
+}
 
 ## -----------------------------------------------------------------------------
 # Method 1: Direct from file path
@@ -105,9 +106,9 @@ hospital_summary_dist$plot() + ggtitle("Daily Hospitalizations by Age Group (wit
 
 ## ----fig.height = 6, fig.width = 8, fig.align = "center"----------------------
 
-# Summary of hospitalizations by age and race group
+# Summary of hospitalizations by two user-defined categories
 hospital_summary <- sim_out_dist$summarize(
-  group_by = c("age", "race"),
+  group_by = c("age", "zone"),
   disease_states = "n_IsympH",
   stats = c("median", "quantile"),
   quantiles = c(0.05, 0.95)
@@ -115,7 +116,7 @@ hospital_summary <- sim_out_dist$summarize(
 hospital_summary
 
 # visualize the summary
-hospital_summary$plot() + ggtitle("Daily Hospitalizations by Age and Race") + theme_bw()
+hospital_summary$plot() + ggtitle("Daily Hospitalizations by Age and Zone") + theme_bw()
 
 ## -----------------------------------------------------------------------------
 # Locate the example YAML configuration file with subgroup parameters
