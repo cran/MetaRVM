@@ -5,8 +5,10 @@
 
 <!-- badges: start -->
 
-<!-- [![R-CMD-check](https://github.com/NSF-RESUME/MetaRVM/actions/workflows/R-CMD-check.yaml/badge.svg)](https://github.com/NSF-RESUME/MetaRVM/actions/workflows/R-CMD-check.yaml) -->
-
+[![CRAN
+status](https://www.r-pkg.org/badges/version/MetaRVM)](https://CRAN.R-project.org/package=MetaRVM)
+[![CRAN
+downloads](https://cranlogs.r-pkg.org/badges/MetaRVM)](https://cran.r-project.org/package=MetaRVM)
 <!-- badges: end -->
 
 This is a compartmental model simulation code for generic respiratory
@@ -42,18 +44,24 @@ outcomes](https://www.medrxiv.org/content/10.1101/2025.05.05.25327021v1.full-tex
 ## Documentation
 
 Full documentation is available at:
-<https://RESUME-Epi.github.io/MetaRVM/dev/>
+<https://RESUME-Epi.github.io/MetaRVM/>
 
 ## Quickstart guide
 
 ### Installation
 
-The development version of `MetaRVM` can be installed from
-[GitHub](https://github.com/) with:
+The current CRAN release is **2.0.0**. Install it with:
 
 ``` r
-# install.packages("devtools")
-devtools::install_github("RESUME-Epi/MetaRVM@user-defined-subpopulation")
+install.packages("MetaRVM")
+```
+
+To install the development branch for **MetaRVM 2.1.0** (branch:
+`feature/simulation-mode-config`) directly from GitHub:
+
+``` r
+# install.packages("remotes")
+remotes::install_github("RESUME-Epi/MetaRVM@feature/simulation-mode-config")
 ```
 
 ### Running a simulation
@@ -95,6 +103,9 @@ simulation_config:
   start_date: 10/01/2023 # m/d/Y
   length: 150
   nsim: 1
+  nrep: 1
+  simulation_mode: deterministic
+  random_seed: 42
 ```
 
 ``` r
@@ -149,6 +160,13 @@ vaccinated individuals. Hospitalized and deceased individuals are
 excluded from the “effective” mixing population. The same model can be
 run in deterministic or stochastic mode, and parameters are supplied
 through a YAML configuration.
+
+For simulation control: - `nsim` is the number of parameter sets (rows
+in sampled parameter matrices when distributions are used) - `nrep` is
+the number of simulation replicates per parameter set - total runs =
+`nsim * nrep` - `simulation_mode` chooses `"deterministic"` or
+`"stochastic"` - `random_seed` ensures reproducibility for both
+parameter sampling and stochastic trajectories
 
 ------------------------------------------------------------------------
 

@@ -104,19 +104,12 @@ hospital_summary_dist <- sim_out_dist$summarize(
 # Plot the summary
 hospital_summary_dist$plot() + ggtitle("Daily Hospitalizations by Age Group (with 90% confidence interval)") + theme_bw()
 
-## ----fig.height = 6, fig.width = 8, fig.align = "center"----------------------
+## -----------------------------------------------------------------------------
+# Locate the example YAML configuration file with distributions
+yaml_file_stoch <- system.file("extdata", "example_config_stochastic.yaml", package = "MetaRVM")
 
-# Summary of hospitalizations by two user-defined categories
-hospital_summary <- sim_out_dist$summarize(
-  group_by = c("age", "zone"),
-  disease_states = "n_IsympH",
-  stats = c("median", "quantile"),
-  quantiles = c(0.05, 0.95)
-)
-hospital_summary
-
-# visualize the summary
-hospital_summary$plot() + ggtitle("Daily Hospitalizations by Age and Zone") + theme_bw()
+## ----results='hide', message=FALSE, warning=FALSE-----------------------------
+sim_out_stoch <- metaRVM(yaml_file_stoch)
 
 ## -----------------------------------------------------------------------------
 # Locate the example YAML configuration file with subgroup parameters

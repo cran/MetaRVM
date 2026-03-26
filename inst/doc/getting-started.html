@@ -344,12 +344,12 @@ code > span.er { color: #a61717; background-color: #e3d2d2; }
 <div id="introduction" class="section level2">
 <h2>Introduction</h2>
 <p>MetaRVM is a comprehensive R package for simulating respiratory virus
-epidemics using meta-population compartmental models. This vignette will
-guide you through the basic usage of the package.</p>
+epidemics using meta-population compartmental models. This vignette
+describes the basic usage of the package.</p>
 </div>
 <div id="installation" class="section level2">
 <h2>Installation</h2>
-<p>You can install the development version of MetaRVM from GitHub:</p>
+<p>The development version of MetaRVM can be installed from GitHub:</p>
 <div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" tabindex="-1"></a><span class="co"># install.packages(&quot;devtools&quot;)</span></span>
 <span id="cb1-2"><a href="#cb1-2" tabindex="-1"></a>devtools<span class="sc">::</span><span class="fu">install_github</span>(<span class="st">&quot;RESUME-Epi/MetaRVM&quot;</span>)</span></code></pre></div>
 </div>
@@ -363,14 +363,14 @@ guide you through the basic usage of the package.</p>
 <h2>Basic Example</h2>
 <p>This example shows how to run a basic meta-population simulation.</p>
 <p>The <code>metaRVM</code> package includes a set of example files in
-its <code>extdata</code> directory. To run the example, we first need to
-locate these files. The <code>system.file()</code> function in R is the
-recommended way to do this, as it will find the files wherever the
-package is installed.</p>
+its <code>extdata</code> directory. To run the example, these files must
+first be located. The <code>system.file()</code> function in R is the
+recommended way to do this, as it finds the files wherever the package
+is installed.</p>
 <div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" tabindex="-1"></a><span class="co"># Locate the example YAML configuration file</span></span>
 <span id="cb3-2"><a href="#cb3-2" tabindex="-1"></a>yaml_file <span class="ot">&lt;-</span> <span class="fu">system.file</span>(<span class="st">&quot;extdata&quot;</span>, <span class="st">&quot;example_config.yaml&quot;</span>, <span class="at">package =</span> <span class="st">&quot;MetaRVM&quot;</span>)</span>
 <span id="cb3-3"><a href="#cb3-3" tabindex="-1"></a><span class="fu">print</span>(yaml_file)</span>
-<span id="cb3-4"><a href="#cb3-4" tabindex="-1"></a><span class="co">#&gt; [1] &quot;/tmp/Rtmpf4IXYA/Rinst6a34717e01828/MetaRVM/extdata/example_config.yaml&quot;</span></span></code></pre></div>
+<span id="cb3-4"><a href="#cb3-4" tabindex="-1"></a><span class="co">#&gt; [1] &quot;/tmp/RtmppE20dr/Rinst15c6d7215f780c/MetaRVM/extdata/example_config.yaml&quot;</span></span></code></pre></div>
 <p>The <code>yaml_file</code> variable now holds the full path to the
 example configuration file. This file is set up to use the other example
 data files (also in the <code>extdata</code> directory) with relative
@@ -400,14 +400,17 @@ paths. Below is the content of the yaml file.</p>
 <span id="cb4-23"><a href="#cb4-23" tabindex="-1"></a><span class="fu">simulation_config</span><span class="kw">:</span></span>
 <span id="cb4-24"><a href="#cb4-24" tabindex="-1"></a><span class="at">  </span><span class="fu">start_date</span><span class="kw">:</span><span class="at"> 01/01/2023</span><span class="co"> # m/d/Y</span></span>
 <span id="cb4-25"><a href="#cb4-25" tabindex="-1"></a><span class="at">  </span><span class="fu">length</span><span class="kw">:</span><span class="at"> </span><span class="dv">150</span></span>
-<span id="cb4-26"><a href="#cb4-26" tabindex="-1"></a><span class="at">  </span><span class="fu">nsim</span><span class="kw">:</span><span class="at"> </span><span class="dv">1</span></span></code></pre></div>
+<span id="cb4-26"><a href="#cb4-26" tabindex="-1"></a><span class="at">  </span><span class="fu">nsim</span><span class="kw">:</span><span class="at"> </span><span class="dv">1</span></span>
+<span id="cb4-27"><a href="#cb4-27" tabindex="-1"></a><span class="at">  </span><span class="fu">nrep</span><span class="kw">:</span><span class="at"> </span><span class="dv">1</span></span>
+<span id="cb4-28"><a href="#cb4-28" tabindex="-1"></a><span class="at">  </span><span class="fu">simulation_mode</span><span class="kw">:</span><span class="at"> deterministic</span></span>
+<span id="cb4-29"><a href="#cb4-29" tabindex="-1"></a><span class="at">  </span><span class="fu">random_seed</span><span class="kw">:</span><span class="at"> </span><span class="dv">42</span></span></code></pre></div>
 <p>For a detailed explanation of all the configuration options, please
 see the <code>yaml-configuration.html</code> vignette.</p>
 </div>
 <div id="running-the-simulation" class="section level2">
 <h2>Running the Simulation</h2>
-<p>Once we have the path to the configuration file, the simulation can
-be run using the <code>metaRVM()</code> function.</p>
+<p>Once the path to the configuration file is available, the simulation
+can be run using the <code>metaRVM()</code> function.</p>
 <div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" tabindex="-1"></a><span class="co"># Load the metaRVM library</span></span>
 <span id="cb5-2"><a href="#cb5-2" tabindex="-1"></a><span class="fu">library</span>(MetaRVM)</span>
 <span id="cb5-3"><a href="#cb5-3" tabindex="-1"></a></span>
@@ -415,25 +418,28 @@ be run using the <code>metaRVM()</code> function.</p>
 <span id="cb5-5"><a href="#cb5-5" tabindex="-1"></a>sim_out <span class="ot">&lt;-</span> <span class="fu">metaRVM</span>(yaml_file)</span>
 <span id="cb5-6"><a href="#cb5-6" tabindex="-1"></a><span class="co">#&gt; Loading required namespace: pkgbuild</span></span>
 <span id="cb5-7"><a href="#cb5-7" tabindex="-1"></a><span class="co">#&gt; Generating model in c</span></span>
-<span id="cb5-8"><a href="#cb5-8" tabindex="-1"></a><span class="co">#&gt; ℹ Re-compiling odin4eefdc98 (debug build)</span></span>
-<span id="cb5-9"><a href="#cb5-9" tabindex="-1"></a><span class="co">#&gt; ℹ Loading odin4eefdc98</span></span></code></pre></div>
+<span id="cb5-8"><a href="#cb5-8" tabindex="-1"></a><span class="co">#&gt; ℹ Re-compiling odin0ddd3654 (debug build)</span></span>
+<span id="cb5-9"><a href="#cb5-9" tabindex="-1"></a><span class="co">#&gt; ℹ Loading odin0ddd3654</span></span></code></pre></div>
 <div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" tabindex="-1"></a><span class="fu">print</span>(sim_out)</span>
 <span id="cb6-2"><a href="#cb6-2" tabindex="-1"></a><span class="co">#&gt; MetaRVM Results Object</span></span>
 <span id="cb6-3"><a href="#cb6-3" tabindex="-1"></a><span class="co">#&gt; =====================</span></span>
 <span id="cb6-4"><a href="#cb6-4" tabindex="-1"></a><span class="co">#&gt; Instances: 1 </span></span>
-<span id="cb6-5"><a href="#cb6-5" tabindex="-1"></a><span class="co">#&gt; Populations: 24 </span></span>
+<span id="cb6-5"><a href="#cb6-5" tabindex="-1"></a><span class="co">#&gt; Populations: </span></span>
 <span id="cb6-6"><a href="#cb6-6" tabindex="-1"></a><span class="co">#&gt; Date range: 2023-10-01 to 2024-02-27 </span></span>
-<span id="cb6-7"><a href="#cb6-7" tabindex="-1"></a><span class="co">#&gt; Total observations: 111600 </span></span>
-<span id="cb6-8"><a href="#cb6-8" tabindex="-1"></a><span class="co">#&gt; Disease states: D, E, H, I_all, I_asymp, I_eff, I_presymp, I_symp, P, R, S, V, cum_V, mob_pop, n_EI, n_EIpresymp, n_HD, n_HR, n_HRD, n_IasympR, n_IsympH, n_IsympR, n_IsympRH, n_SE, n_SV, n_VE, n_VS, n_preIsymp, p_HRD, p_SE, p_VE</span></span>
-<span id="cb6-9"><a href="#cb6-9" tabindex="-1"></a><span class="fu">head</span>(sim_out<span class="sc">$</span>results)</span>
-<span id="cb6-10"><a href="#cb6-10" tabindex="-1"></a><span class="co">#&gt;          date    age   race  zone disease_state        value instance</span></span>
-<span id="cb6-11"><a href="#cb6-11" tabindex="-1"></a><span class="co">#&gt;        &lt;Date&gt; &lt;char&gt; &lt;char&gt; &lt;int&gt;        &lt;char&gt;        &lt;num&gt;    &lt;int&gt;</span></span>
-<span id="cb6-12"><a href="#cb6-12" tabindex="-1"></a><span class="co">#&gt; 1: 2023-10-01   0-17      A    11             D 2.252583e-04        1</span></span>
-<span id="cb6-13"><a href="#cb6-13" tabindex="-1"></a><span class="co">#&gt; 2: 2023-10-01   0-17      A    11             E 1.305178e+01        1</span></span>
-<span id="cb6-14"><a href="#cb6-14" tabindex="-1"></a><span class="co">#&gt; 3: 2023-10-01   0-17      A    11             H 2.304447e-01        1</span></span>
-<span id="cb6-15"><a href="#cb6-15" tabindex="-1"></a><span class="co">#&gt; 4: 2023-10-01   0-17      A    11         I_all 2.731688e+01        1</span></span>
-<span id="cb6-16"><a href="#cb6-16" tabindex="-1"></a><span class="co">#&gt; 5: 2023-10-01   0-17      A    11       I_asymp 3.227854e-01        1</span></span>
-<span id="cb6-17"><a href="#cb6-17" tabindex="-1"></a><span class="co">#&gt; 6: 2023-10-01   0-17      A    11         I_eff 2.476245e+01        1</span></span></code></pre></div>
+<span id="cb6-7"><a href="#cb6-7" tabindex="-1"></a><span class="co">#&gt; Parameter sets (nsim): 1 </span></span>
+<span id="cb6-8"><a href="#cb6-8" tabindex="-1"></a><span class="co">#&gt; Replicates per set (nrep): 1 </span></span>
+<span id="cb6-9"><a href="#cb6-9" tabindex="-1"></a><span class="co">#&gt; Simulation mode: deterministic </span></span>
+<span id="cb6-10"><a href="#cb6-10" tabindex="-1"></a><span class="co">#&gt; Total observations: 388800 </span></span>
+<span id="cb6-11"><a href="#cb6-11" tabindex="-1"></a><span class="co">#&gt; Disease states: D, E, H, I_all, I_asymp, I_eff, I_presymp, I_symp, P, R, S, S_alloc, S_eff_prod, S_src_int, V, V_alloc, V_src_int, cum_V, mob_pop, n_EI, n_EIpresymp, n_HD, n_HR, n_HRD, n_IasympR, n_IsympH, n_IsympR, n_IsympRH, n_RS, n_SE, n_SE_eff, n_SV, n_VE, n_VS, n_preIsymp, p_HRD, p_RS, p_SE, p_VE</span></span>
+<span id="cb6-12"><a href="#cb6-12" tabindex="-1"></a><span class="fu">head</span>(sim_out<span class="sc">$</span>results)</span>
+<span id="cb6-13"><a href="#cb6-13" tabindex="-1"></a><span class="co">#&gt;          date    age   race  zone disease_state        value instance</span></span>
+<span id="cb6-14"><a href="#cb6-14" tabindex="-1"></a><span class="co">#&gt;        &lt;Date&gt; &lt;char&gt; &lt;char&gt; &lt;int&gt;        &lt;char&gt;        &lt;num&gt;    &lt;int&gt;</span></span>
+<span id="cb6-15"><a href="#cb6-15" tabindex="-1"></a><span class="co">#&gt; 1: 2023-10-01   0-17      A    11             D 2.252583e-04        1</span></span>
+<span id="cb6-16"><a href="#cb6-16" tabindex="-1"></a><span class="co">#&gt; 2: 2023-10-01   0-17      A    11             E 1.365434e+01        1</span></span>
+<span id="cb6-17"><a href="#cb6-17" tabindex="-1"></a><span class="co">#&gt; 3: 2023-10-01   0-17      A    11             H 2.304447e-01        1</span></span>
+<span id="cb6-18"><a href="#cb6-18" tabindex="-1"></a><span class="co">#&gt; 4: 2023-10-01   0-17      A    11         I_all 2.742619e+01        1</span></span>
+<span id="cb6-19"><a href="#cb6-19" tabindex="-1"></a><span class="co">#&gt; 5: 2023-10-01   0-17      A    11       I_asymp 3.555784e-01        1</span></span>
+<span id="cb6-20"><a href="#cb6-20" tabindex="-1"></a><span class="co">#&gt; 6: 2023-10-01   0-17      A    11         I_eff 2.483657e+01        1</span></span></code></pre></div>
 <p>For more details on running <code>metaRVM</code>, refer to the
 <code>running-a-simulation.html</code> vignette.</p>
 </div>
